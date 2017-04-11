@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label id="city_label">城市</label>
+    <select id="city" name="city">
+        <option id="bj" value="beijing">北京</option>
+        <option id="sh" value="shanghai">上海</option>
+        <option id="sz" value="shenzhen">深圳</option>
+        <option id="gz" value="guangzhou">广州</option>
+        <option id="hz" value="hangzhou">杭州</option>
+    </select>
+
+    <label id="school_label">学校</label>
+    <select id="school" name="city">
+
+    </select>
+</form>
+
+
+<script>
+    var city=document.getElementById('city');
+    var c_val=city.value;
+    var school=document.getElementById('school');
+    var s_length=school.options.length;
+
+    if(s_length>0){
+        for(var i=0;i<s_length;i++){
+            school.remove(0);
+        }
+    }else{
+        addOptions()
+    }
+
+
+    function addOptions(val,txt) {
+        var opt=document.createElement('option');
+        opt.innerText=txt;
+        opt.value=val;
+        school.appendChild(opt);
+    }
+</script>
+</body>
+</html>
