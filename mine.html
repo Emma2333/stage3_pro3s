@@ -3,46 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        .school{
+            display: none;
+        }
+        .on {
+            display: inline-block;
+        }
+        .show{
+            display: block;
+        }
+        .unshow{
+            display: none;
+        }
+
+    </style>
 </head>
 <body>
-<form>
-    <label id="city_label">城市</label>
-    <select id="city" name="city">
-        <option id="bj" value="beijing">北京</option>
-        <option id="sh" value="shanghai">上海</option>
-        <option id="sz" value="shenzhen">深圳</option>
-        <option id="gz" value="guangzhou">广州</option>
-        <option id="hz" value="hangzhou">杭州</option>
-    </select>
 
-    <label id="school_label">学校</label>
-    <select id="school" name="city">
-
-    </select>
-</form>
+<label for="in">
+    在校生
+    <input type="radio" id="in" name="stage"  class="box" value="in" checked=true>
+</label>
+<label for="out" >
+    已毕业
+    <input type="radio" id="out" name="stage" class="box" value="out">
+</label>
 
 
+<div id="inschool"class="show">
+    <form>
+        <label id="city_label">城市</label>
+        <select id="city" name="city">
+            <option id="bj" value="0">北京</option>
+            <option id="sh" value="1">上海</option>
+            <option id="gz" value="2">广州</option>
+            <option id="hz" value="3">杭州</option>
+        </select>
+
+        <label id="school_label">学校</label>
+        <select class="school on " id="0" name="city">
+            <option>北京大学</option>
+            <option>清华大学</option>
+            <option>中国人大</option>
+        </select>
+        <select class="school "  id="1" name="city">
+            <option>复旦大学</option>
+            <option>上海交通</option>
+            <option>同济大学</option>
+        </select>
+        <select class="school " id="2"name="city">
+            <option>中山大学</option>
+            <option>华南理工</option>
+        </select>
+        <select class="school " id="3" name="city">
+            <option>浙江大学</option>
+            <option>浙江理工</option>
+        </select>
+    </form>
+</div>
+
+<div id="outschool" class="unshow">
+    <form>
+        <label for="address">工作地址</label>
+        <input type="text" id="address">
+    </form>
+</div>
 <script>
-    var city=document.getElementById('city');
-    var c_val=city.value;
-    var school=document.getElementById('school');
-    var s_length=school.options.length;
+    var inschool=document.getElementById('inschool');
+    var outshool=document.getElementById('outschool');/*这两个是div不是input*/
+var arr=document.getElementsByClassName("box");
+for(var i=0;i<arr.length;i++){
+    arr[i].onchange=function () {
+        if (arr[0].checked == true) {
+            inschool.className = "show"
+            outshool.className = "unshow"
+            cityChange();
+        } else {
 
-    if(s_length>0){
-        for(var i=0;i<s_length;i++){
-            school.remove(0);
+            inschool.className = "unshow"
+            outshool.className = "show"
         }
-    }else{
-        addOptions()
     }
+}
+
+function cityChange() {
+    var school=document.getElementsByClassName("school");
+    var city=document.getElementById('city');
+    var old_val=city.value;
+
+    city.onchange=function () {
+        school[old_val].className="school";
+        var c_length=city.options.length;
+        var new_val=city.value;
+        for(var i=0;i<c_length;i++){
+            if(new_val==i){
+                var chosen=document.getElementById(i);
+                chosen.className="school on "
+            }else {
+                var chosen=document.getElementById(i);
+                chosen.className="school "
+            }
+        }
+    }
+}
 
 
-    function addOptions(val,txt) {
-        var opt=document.createElement('option');
-        opt.innerText=txt;
-        opt.value=val;
-        school.appendChild(opt);
-    }
+
 </script>
 </body>
 </html>
