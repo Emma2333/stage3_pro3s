@@ -13,7 +13,7 @@
         .show{
             display: block;
         }
-        .unshow{
+        .hide{
             display: none;
         }
 
@@ -21,14 +21,11 @@
 </head>
 <body>
 
-<label for="in">
-    在校生
-    <input type="radio" id="in" name="stage"  class="box" value="in" checked=true>
-</label>
-<label for="out" >
-    已毕业
-    <input type="radio" id="out" name="stage" class="box" value="out">
-</label>
+<input type="radio" id="in" name="stage"  class="box" value="in" checked=true>
+<label for="in">在校生</label>
+
+<input type="radio" id="out" name="stage" class="box" value="out">
+<label for="out" >已毕业</label>
 
 
 <div id="inschool"class="show">
@@ -63,7 +60,7 @@
     </form>
 </div>
 
-<div id="outschool" class="unshow">
+<div id="outschool" class="hide">
     <form>
         <label for="address">工作地址</label>
         <input type="text" id="address">
@@ -72,20 +69,19 @@
 <script>
     var inschool=document.getElementById('inschool');
     var outshool=document.getElementById('outschool');/*这两个是div不是input*/
-var arr=document.getElementsByClassName("box");
-for(var i=0;i<arr.length;i++){
-    arr[i].onchange=function () {
-        if (arr[0].checked == true) {
-            inschool.className = "show"
-            outshool.className = "unshow"
-            cityChange();
-        } else {
-
-            inschool.className = "unshow"
-            outshool.className = "show"
+    var arr=document.getElementsByClassName("box");
+    for(var i=0;i<arr.length;i++){
+        arr[i].onchange=function () {
+             if (arr[0].checked == true) {
+                 inschool.className = "show";
+                outshool.className = "hide";
+                 cityChange();
+             } else {
+                inschool.className = "hide";
+                outshool.className = "show";
+             }
         }
     }
-}
 
 function cityChange() {
     var school=document.getElementsByClassName("school");
@@ -99,10 +95,10 @@ function cityChange() {
         for(var i=0;i<c_length;i++){
             if(new_val==i){
                 var chosen=document.getElementById(i);
-                chosen.className="school on "
+                chosen.className="school on ";
             }else {
                 var chosen=document.getElementById(i);
-                chosen.className="school "
+                chosen.className="school ";
             }
         }
     }
