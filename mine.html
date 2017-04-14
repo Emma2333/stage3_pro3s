@@ -67,6 +67,7 @@
     </form>
 </div>
 <script>
+    cityChange();
     var inschool=document.getElementById('inschool');
     var outshool=document.getElementById('outschool');/*这两个是div不是input*/
     var arr=document.getElementsByClassName("box");
@@ -74,7 +75,7 @@
         arr[i].onchange=function () {
              if (arr[0].checked == true) {
                  inschool.className = "show";
-                outshool.className = "hide";
+                 outshool.className = "hide";
                  cityChange();
              } else {
                 inschool.className = "hide";
